@@ -1,0 +1,63 @@
+/* Resetando */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    font-family: cursive, sans-serif;
+}
+
+/* Estilização do cabeçalho */
+header {
+    height: 110px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px #FFCC33;
+}
+
+/* Container centralizado */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Menu e botão 'Search' */
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+input {
+    padding: 10px;
+    width: 250px;
+    border: 5px solid white;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 15px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #FFCC33;
+    color: black;
+    border: black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #cc3232;
+}
+
