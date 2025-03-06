@@ -6,6 +6,8 @@
     <title>Bem-vindo ao PokéSite</title>
     <!-- CSS -->
      <link rel="stylesheet" href="css/style.css">
+     <!-- JS -->
+     <script src="JS/script.js" defer></script>
 </head>
 <body>
     <header>
@@ -21,13 +23,13 @@
             </nav>
         </div>
     </header>
-    <main>
-        <section id="pokemonDetails"></section>
-
+    <main class="container-grid">
+        <!-- Lista advinda da API -->
+        <section id="pokemonDetalhes"></section>
+        
         <section>
             <h2>Lista de Pokémon</h2>
-            <!-- Lista? Verificar no JS -->
-            <ul id="pokemonList"></ul>
+            <ul id="pokemon-lista"></ul>
         </section>
     </main>
 
