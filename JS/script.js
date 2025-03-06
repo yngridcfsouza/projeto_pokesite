@@ -10,22 +10,6 @@ async function fetchPokemonLista() {
     }
 }
 
-// Função para buscar um Pokémon específico
-async function fetchPokemonPorNome(pokemonName) {
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName.toLowerCase()}`;
-    try {
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            displayPokemonDetalhes(data);
-        } else {
-            alert('Pokémon não encontrado!');
-        }
-    } catch (error) {
-        console.error("Erro ao buscar Pokémon:", error);
-    }
-}
-
 // Função para exibir a lista de Pokémon na página
 function displayPokemonLista(pokemonLista) {
     const listaElemento = document.getElementById('pokemon-lista');
@@ -41,30 +25,46 @@ function displayPokemonLista(pokemonLista) {
     });
 }
 
-// Função para exibir os detalhes do Pokémon pesquisado
+// Função para buscar um Pokémon específico
+async function fetchPokemonPorNome(pokemonNome) {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonNome.toLowerCase()}`;
+    try {
+        const response = await fetch(url);
+        if (response.ok) {
+            const data = await response.json();
+            displayPokemonDetalhes(data);
+        } else {
+            alert('Pokémon não encontrado!');
+        }
+    } catch (error) {
+        console.error("Erro ao buscar Pokémon:", error);
+    }
+}
+
+// Função para exibir os detalhes do Pokmon pesquisado
 function displayPokemonDetalhes(pokemon) {
     const detalhesSecao = document.getElementById('pokemonDetalhes');
     detalhesSecao.innerHTML = `
         <h2>${pokemon.name.toUpperCase()}</h2>
         <img src="${pokemon.sprites.front_default}" alt="${pokemon.name}">
-        <p><strong>Tipos:</strong> ${pokemon.types.map(type => type.type.name).join(', ')}</p>
-        <p><strong>Habilidades:</strong> ${pokemon.abilities.map(ability => ability.ability.name).join(', ')}</p>
-        <p><strong>HP:</strong> ${pokemon.stats.find(stat => stat.stat.name === 'hp').base_stat}</p>
-        <p><strong>Ataque:</strong> ${pokemon.stats.find(stat => stat.stat.name === 'attack').base_stat}</p>
-        <p><strong>Defesa:</strong> ${pokemon.stats.find(stat => stat.stat.name === 'defense').base_stat}</p>
+        <p>Tipos: ${pokemon.types.map(type => type.type.name).join(', ')}</p>
+        <p>Habilidades: ${pokemon.abilities.map(ability => ability.ability.name).join(', ')}</p>
+        <p>HP: ${pokemon.stats.find(stat => stat.stat.name === 'hp').base_stat}</p>
+        <p>Ataque: ${pokemon.stats.find(stat => stat.stat.name === 'attack').base_stat}</p>
+        <p>Defesa: ${pokemon.stats.find(stat => stat.stat.name === 'defense').base_stat}</p>
     `;
 }
 
 // Função para configurar o evento do botão de busca
 document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita o comportamento padrão de envio do formulário
-    const pokemonName = document.getElementById('campo-busca').value.trim();
-    if (pokemonName) {
-        fetchPokemonPorNome(pokemonName); // Busca o Pokémon pelo nome
+    event.preventDefault(); // Evita recarregar a página e perder os dados digitaods
+    const pokemonNome = document.getElementById('campo-busca').value.trim();
+    if (pokemonNome) {
+        fetchPokemonPorNome(pokemonNome); // Busca o Pokémon pelo nome
     } else {
         alert('Por favor, digite um nome de Pokémon!');
     }
 });
 
 // Chama a função para buscar e exibir a lista de Pokémon ao carregar a página
-window.onload = fetchPokemonLista;
+window.addEventListener("DOMContentLoaded", fetchPokemonLista);

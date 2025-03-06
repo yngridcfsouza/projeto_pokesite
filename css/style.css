@@ -6,8 +6,8 @@
 }
 
 body {
-    background-color: #f9f9f9; /* Cor de fundo mais suave */
-    font-family: 'Arial', sans-serif; /* Fonte mais padrão */
+    background-color: #f9f9f9; 
+    font-family: 'Arial', sans-serif;
 }
 
 /* Estilização do cabeçalho */
@@ -129,14 +129,10 @@ button:focus {
     transform: scale(1.05);
 }
 
-/* Adicionando estilos para exibir os atributos de HP, Ataque e Defesa */
+/* Exibir detalhes */
 #pokemonDetalhes p {
     font-size: 16px;
     margin: 10px 0;
-}
-
-#pokemonDetalhes strong {
-    color: #ffcc33;
 }
 
 /* Rodapé */
