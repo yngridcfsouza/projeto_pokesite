@@ -52,7 +52,13 @@ function displayPokemonDetalhes(pokemon) {
         <p>HP: ${pokemon.stats.find(stat => stat.stat.name === 'hp').base_stat}</p>
         <p>Ataque: ${pokemon.stats.find(stat => stat.stat.name === 'attack').base_stat}</p>
         <p>Defesa: ${pokemon.stats.find(stat => stat.stat.name === 'defense').base_stat}</p>
+        <button id="adicionarFavorito">Favoritar</button>
     `;
+
+    // Adiciona evento de clique ao botão Favoritar após a criação do botão
+    document.getElementById("adicionarFavorito").addEventListener("click", () => {
+        adicionarFavorito(pokemon.name);
+    });
 }
 
 // Função para configurar o evento do botão de busca
@@ -68,3 +74,51 @@ document.querySelector('form').addEventListener('submit', function(event) {
 
 // Chama a função para buscar e exibir a lista de Pokémon ao carregar a página
 window.addEventListener("DOMContentLoaded", fetchPokemonLista);
+
+// Recupera a lista de favoritos do localStorage
+let listaFavoritos = JSON.parse(localStorage.getItem("listaFavoritos")) || [];
+
+// Adicionar ou remover Pokémon da lista de favoritos
+function adicionarFavorito(pokemonNome) {
+    const index = listaFavoritos.indexOf(pokemonNome.toLowerCase());
+
+    if (index !== -1) {
+        listaFavoritos.splice(index, 1); // Remove da lista
+    } else {
+        listaFavoritos.push(pokemonNome.toLowerCase()); // Adiciona à lista
+    }
+
+    localStorage.setItem("listaFavoritos", JSON.stringify(listaFavoritos));
+    displayFavoritos();
+}
+
+// Exibir a lista de favoritos
+function displayFavoritos() {
+    const listaElementoFav = document.getElementById("lista-favoritos");
+    listaElementoFav.innerHTML = ""; // Limpa a lista
+
+    listaFavoritos.forEach(nome => {
+        const listaItemFav = document.createElement("li");
+        listaItemFav.textContent = nome;
+
+        // Criando um link para exibir detalhes do favorito
+        const link = document.createElement("a");
+        link.href = "#";
+        link.textContent = "Detalhes";
+        link.onclick = (event) => {
+            event.preventDefault(); // Evita recarregar a página
+            fetchPokemonPorNome(nome); // Chama a função para exibir detalhes
+        };
+
+        const botaoRemover = document.createElement("button");
+        botaoRemover.textContent = "Remover";
+        botaoRemover.onclick = () => adicionarFavorito(nome);
+
+        listaItemFav.appendChild(link);
+        listaItemFav.appendChild(botaoRemover);
+        listaElementoFav.appendChild(listaItemFav);
+    });
+}
+
+// Carregar favoritos ao iniciar a página
+window.onload = displayFavoritos;

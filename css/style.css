@@ -101,6 +101,7 @@ button:focus {
     border-radius: 10px;
     display: inline-block;
     min-width: 300px;
+    min-height: 100px;
     text-align: center;
 }
 
@@ -133,6 +134,41 @@ button:focus {
 #pokemonDetalhes p {
     font-size: 16px;
     margin: 10px 0;
+}
+
+/* Favoritos */
+
+.container-grid .favoritos {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    height: 100%;
+    min-height: 100px;
+    background-color: whitesmoke;
+    gap: 0 20px;
+    padding: 30px;
+    align-items: center;
+    text-align: center;
+}
+
+#lista-favoritos {
+    margin-top: 20px;
+}
+
+/* Botão de remover dos favoritos */
+#lista-favoritos button {
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 14px;
+    background-color: rgb(143, 76, 76);
+    color: white;
+}
+
+#lista-favoritos button:hover {
+    background-color: darkred;
+}
+
+a {
+    padding: 0 20px 0 20px;
 }
 
 /* Rodapé */
